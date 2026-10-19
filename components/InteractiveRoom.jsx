@@ -82,7 +82,7 @@ export default function InteractiveRoom() {
                 scale: 1.5 
               }}
               transition={{ duration: 2.5 + Math.random(), ease: 'easeOut' }}
-              className="absolute bottom-0 text-rose-500"
+              className="absolute bottom-0 text-pink-500"
             >
               <Heart className="w-8 h-8 fill-current" />
             </motion.div>
@@ -98,13 +98,13 @@ export default function InteractiveRoom() {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Heart Button */}
-          <div className="flex flex-col items-center justify-center p-8 bg-white/60 rounded-3xl border border-white/80 backdrop-blur-md shadow-xl shadow-rose-100/50">
+          <div className="flex flex-col items-center justify-center p-8 bg-white/60 rounded-3xl border border-white/80 backdrop-blur-md shadow-xl shadow-pink-100/50">
             <h3 className="text-xl mb-6 font-light">Send some love</h3>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={sendHearts}
-              className="w-32 h-32 rounded-full bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center shadow-[0_0_40px_rgba(244,63,94,0.4)] transition-shadow hover:shadow-[0_0_60px_rgba(244,63,94,0.6)] group"
+              className="w-32 h-32 rounded-full bg-gradient-to-tr from-sky-400 to-pink-500 flex items-center justify-center shadow-[0_0_40px_rgba(219,39,119,0.3)] transition-shadow hover:shadow-[0_0_60px_rgba(56,189,248,0.35)] group"
             >
               <Heart className="w-12 h-12 text-white fill-white group-active:scale-90 transition-transform" />
             </motion.button>
@@ -112,7 +112,7 @@ export default function InteractiveRoom() {
           </div>
 
           {/* Live Poll */}
-          <div className="flex flex-col justify-center p-8 bg-white/60 rounded-3xl border border-white/80 backdrop-blur-md shadow-xl shadow-rose-100/50">
+          <div className="flex flex-col justify-center p-8 bg-white/60 rounded-3xl border border-white/80 backdrop-blur-md shadow-xl shadow-pink-100/50">
             <h3 className="text-xl mb-6 font-light text-center">Where should we go for our anniversary trip?</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -122,14 +122,14 @@ export default function InteractiveRoom() {
                   <button
                     key={option}
                     onClick={() => votePoll(option)}
-                    className="w-full relative overflow-hidden bg-slate-50 hover:bg-rose-50 transition-colors border border-slate-200 rounded-xl p-4 text-left group"
+                    className="w-full relative overflow-hidden bg-slate-50 hover:bg-pink-50 transition-colors border border-slate-200 rounded-xl p-4 text-left group"
                   >
                     <div 
-                      className="absolute left-0 top-0 bottom-0 bg-rose-500/20 transition-all duration-1000 ease-out"
+                      className="absolute left-0 top-0 bottom-0 bg-pink-500/20 transition-all duration-1000 ease-out"
                       style={{ width: `${percentage}%` }}
                     />
                     <div className="relative z-10 flex justify-between items-center">
-                      <span className="font-medium group-hover:text-rose-600 transition-colors">{option}</span>
+                      <span className="font-medium group-hover:text-pink-600 transition-colors">{option}</span>
                       <span className="text-sm text-slate-500">{votes} vote{votes !== 1 ? 's' : ''} ({percentage}%)</span>
                     </div>
                   </button>
@@ -143,12 +143,12 @@ export default function InteractiveRoom() {
                 placeholder="Suggest another place..."
                 value={customOption}
                 onChange={(e) => setCustomOption(e.target.value)}
-                className="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 pr-12 focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 transition-all text-slate-800 placeholder-slate-400"
+                className="w-full bg-white border border-slate-200 rounded-xl py-3 px-4 pr-12 focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition-all text-slate-800 placeholder-slate-400"
               />
               <button 
                 type="submit"
                 disabled={!customOption.trim()}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-rose-500 disabled:opacity-50 disabled:hover:text-slate-400 transition-colors"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-pink-500 disabled:opacity-50 disabled:hover:text-slate-400 transition-colors"
               >
                 <Send className="w-5 h-5" />
               </button>

@@ -52,7 +52,7 @@ export default function LoveCounter() {
   return (
     <section className="py-20 px-4 text-center flex flex-col items-center relative z-10">
       <div className="h-20 mb-8 max-w-2xl mx-auto">
-        <p className="text-xl md:text-2xl font-light text-rose-500 italic min-h-[4rem]">
+        <p className="text-xl md:text-2xl font-light text-pink-500 italic min-h-[4rem]">
           "{text}"
           <span className="animate-pulse">|</span>
         </p>
@@ -70,9 +70,9 @@ export default function LoveCounter() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 + 1, duration: 0.5 }}
-            className="flex flex-col items-center justify-center p-6 bg-white/60 rounded-2xl border border-white/80 backdrop-blur-md shadow-xl shadow-rose-100/50"
+            className="flex flex-col items-center justify-center p-6 bg-white/60 rounded-2xl border border-white/80 backdrop-blur-md shadow-xl shadow-pink-100/50"
           >
-            <span className="text-5xl md:text-6xl font-light text-rose-500 mb-2 font-mono">
+            <span className="text-5xl md:text-6xl font-light text-pink-500 mb-2 font-mono">
               {item.value}
             </span>
             <span className="text-sm tracking-widest uppercase text-slate-500">
