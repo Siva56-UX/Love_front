@@ -1,7 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const memories = [
   {
@@ -41,105 +40,7 @@ const photos = Array.from({ length: 16 }, (_, index) => {
   return { src: `/images/${filename}`, alt: `ภาพความทรงจำ ${index + 1}` };
 });
 
-function PhotoViewer({ photo, onClose, onPrevious, onNext }) {
-  const [touchStart, setTouchStart] = useState(null);
-
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') onClose();
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        onPrevious();
-      }
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        onNext();
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [onClose, onNext, onPrevious]);
-
-  const shareMemory = async () => {
-    const url = new URL(photo.src, window.location.href).href;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'ความทรงจำของเรา', text: photo.alt, url });
-      } catch (error) {
-        if (error.name !== 'AbortError') console.error('Unable to share this memory.', error);
-      }
-      return;
-    }
-    await navigator.clipboard?.writeText(url);
-  };
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 p-4 text-white md:p-8"
-      role="dialog"
-      aria-modal="true"
-      aria-label="ดูภาพความทรงจำ"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}
-      onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-      onTouchEnd={(event) => {
-        if (touchStart === null) return;
-        const distance = event.changedTouches[0].clientX - touchStart;
-        if (Math.abs(distance) > 48) (distance > 0 ? onPrevious : onNext)();
-        setTouchStart(null);
-      }}
-    >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="ปิดภาพ"
-        className="absolute right-5 top-5 z-10 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-3xl transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-      >
-        ×
-      </button>
-      <button
-        type="button"
-        onClick={(event) => { event.stopPropagation(); onPrevious(); }}
-        aria-label="ภาพก่อนหน้า"
-        className="absolute left-3 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-3xl transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white md:left-8"
-      >
-        ‹
-      </button>
-      <figure className="flex max-h-full max-w-5xl flex-col items-center" onClick={(event) => event.stopPropagation()}>
-        <img src={photo.src} alt={photo.alt} className="max-h-[78vh] max-w-full rounded-sm object-contain" />
-        <figcaption className="mt-4 flex w-full items-center justify-between gap-4 text-sm text-white/75">
-          <span>{photo.alt}</span>
-          <button type="button" onClick={shareMemory} className="min-h-11 rounded-full border border-white/30 px-5 text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
-            แชร์ความทรงจำ
-          </button>
-        </figcaption>
-      </figure>
-      <button
-        type="button"
-        onClick={(event) => { event.stopPropagation(); onNext(); }}
-        aria-label="ภาพถัดไป"
-        className="absolute right-3 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-3xl transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white md:right-8"
-      >
-        ›
-      </button>
-    </motion.div>
-  );
-}
-
 export default function MemoryTimeline() {
-  const [activePhoto, setActivePhoto] = useState(null);
-  const showPhoto = useCallback((index) => setActivePhoto(index), []);
-  const closePhoto = useCallback(() => setActivePhoto(null), []);
-  const previousPhoto = useCallback(() => setActivePhoto((index) => (index - 1 + photos.length) % photos.length), []);
-  const nextPhoto = useCallback(() => setActivePhoto((index) => (index + 1) % photos.length), []);
-
   return (
     <section className="relative py-16 md:py-24" aria-labelledby="memories-title">
       <div className="mx-auto max-w-6xl px-5 md:px-10">
@@ -172,10 +73,9 @@ export default function MemoryTimeline() {
                     <span className="h-2.5 w-2.5 rounded-full bg-pink-500" />
                   </span>
                   <div className={`col-start-2 w-full max-w-sm md:row-start-1 md:justify-self-center ${isEven ? 'md:col-start-3' : 'md:col-start-1'}`}>
-                    <button type="button" onClick={() => showPhoto(photos.findIndex((photo) => photo.src === memory.image))} className="group block w-full -rotate-1 bg-white p-2 text-left shadow-md shadow-pink-100/70 transition duration-300 hover:-translate-y-1 hover:rotate-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-500 md:p-3">
+                    <figure className="block w-full -rotate-1 bg-white p-2 shadow-md shadow-pink-100/70 md:p-3">
                       <img src={memory.image} alt={memory.title} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-                      <span className="block px-2 pb-1 pt-3 text-sm text-slate-600">แตะเพื่อดูภาพเต็มจอ</span>
-                    </button>
+                    </figure>
                   </div>
                 </motion.article>
               );
@@ -191,37 +91,25 @@ export default function MemoryTimeline() {
             </div>
             <span className="pb-1 text-sm text-slate-500">{photos.length} ภาพ</span>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-5">
-            {photos.map((photo, index) => (
-              <motion.button
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-3">
+            {photos.map((photo) => (
+              <motion.figure
                 key={photo.src}
-                type="button"
-                onClick={() => showPhoto(index)}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '40px' }}
-                transition={{ duration: 0.35, delay: (index % 4) * 0.04 }}
-                aria-label={`เปิด${photo.alt}`}
-                className="group relative aspect-[4/5] overflow-hidden bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-500"
+                viewport={{ once: true, margin: '80px' }}
+                transition={{ duration: 0.65, ease: 'easeOut' }}
+                className="overflow-hidden bg-white p-2 shadow-sm shadow-sky-100/80 md:p-3"
               >
-                <img src={photo.src} alt={photo.alt} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.035]" />
-              </motion.button>
+                <img src={photo.src} alt={photo.alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="px-2 pb-1 pt-3 text-sm text-slate-600">{photo.alt}</figcaption>
+              </motion.figure>
             ))}
           </div>
-          <p className="mt-6 text-center text-sm text-slate-500">แตะรูปเพื่อดูเต็มจอ แล้วปัดซ้ายหรือขวาเพื่อดูรูปถัดไป</p>
+          <p className="mt-6 text-center text-sm text-slate-500">เลื่อนลงช้า ๆ เพื่อดูภาพทั้งหมดตามลำดับ</p>
         </div>
       </div>
 
-      <AnimatePresence>
-        {activePhoto !== null && (
-          <PhotoViewer
-            photo={photos[activePhoto]}
-            onClose={closePhoto}
-            onPrevious={previousPhoto}
-            onNext={nextPhoto}
-          />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
