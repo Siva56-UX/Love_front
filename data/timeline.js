@@ -55,14 +55,14 @@ export const timeline = [
     "id": "memory-13",
     "date": "March 14, 2025",
     "title": "ไปเที่ยวต่างจังหวัดด้วยกันครั้งแรก",
-    "description": "ได้ไข้กลับมาด้วย",
+    "description": "ได้ไข้กลับมาด้วย เสียค่าหมอไปแพงกว่าค่าเที่ยวทั้งทริปอีก",
     "image": "/images/74263_0.jpg"
   },
   {
     "id": "memory-14",
     "date": "March 14, 2025",
-    "title": "แวะถ่ายรูปสักหน่อย",
-    "description": "",
+    "title": "ถ่ายรูปสักหน่อย",
+    "description": "เล็งคาเฟ่นี้มาตั้งแต่กรุงเทพแล้ว",
     "image": "/images/74264_0.jpg"
   },
   {
