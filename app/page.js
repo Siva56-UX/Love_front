@@ -8,9 +8,12 @@ import InteractiveRoom from '@/components/InteractiveRoom';
 import QuizSection from '@/components/QuizSection';
 import MemoryHeart from '@/components/MemoryHeart';
 import BackgroundMusic from '@/components/BackgroundMusic';
+import BouquetIntro from '@/components/BouquetIntro';
 
 export default function Home() {
   const musicRef = useRef(null);
+  const [showBouquet, setShowBouquet] = useState(true);
+  const finishBouquet = useCallback(() => setShowBouquet(false), []);
   const [reachedTimeline, setReachedTimeline] = useState(false);
   const onFirstMemoryVisible = useCallback(() => setReachedTimeline(true), []);
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -20,7 +23,9 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-50 text-slate-800">
       <BackgroundMusic ref={musicRef} unlocked={isUnlocked} reachedTimeline={reachedTimeline} />
       <AnimatePresence mode="wait">
-        {!isUnlocked ? (
+        {showBouquet ? (
+          <BouquetIntro key="bouquet" onComplete={finishBouquet} />
+        ) : !isUnlocked ? (
           <PasscodeScreen onCorrectPin={() => musicRef.current?.prime()} key="passcode" onUnlock={() => setIsUnlocked(true)} />
         ) : (
           <motion.div
