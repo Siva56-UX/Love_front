@@ -84,7 +84,7 @@ export const timeline = [
     "date": "June 10, 2025",
     "title": "ไปบ้านสร้อยครั้งแรก ",
     "description": "แรกๆก็กลัวๆ หลังไปฉ่ๆ",
-    "image": "/images/91488.jpg"
+    "image": "/images/91743_0.jpg"
   },
   {
     "id": "memory-17",
@@ -122,4 +122,3 @@ export const timeline = [
     "image": "/images/74266_0.jpg"
   }
 ];
-
