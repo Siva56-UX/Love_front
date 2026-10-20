@@ -19,8 +19,9 @@ export const metadata = {
     title: "Our Memories",
     statusBarStyle: "default",
   },
-  themeColor: "#fdf2f8",
 };
+
+export const viewport = { themeColor: "#e0f2fe" };
 
 export default function RootLayout({ children }) {
   return (

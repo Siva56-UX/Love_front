@@ -12,7 +12,7 @@ export default function Home() {
   const [isQuizPassed, setIsQuizPassed] = useState(false);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-sky-50 via-pink-50 to-pink-100 text-slate-800">
+    <main className="min-h-screen bg-gradient-to-br from-sky-100 via-sky-50 to-pink-50 text-slate-800">
       <AnimatePresence mode="wait">
         {!isUnlocked ? (
           <PasscodeScreen key="passcode" onUnlock={() => setIsUnlocked(true)} />
@@ -39,7 +39,7 @@ export default function Home() {
             )}
             
             {/* Footer */}
-            <footer className="py-8 text-center text-slate-500 border-t border-pink-100">
+            <footer className="py-8 text-center text-slate-500 border-t border-sky-200">
               <p>Made with ❤️ for Sroy</p>
             </footer>
           </motion.div>

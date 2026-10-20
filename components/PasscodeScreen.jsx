@@ -40,8 +40,8 @@ export default function PasscodeScreen({ onUnlock }) {
       className="min-h-screen flex flex-col items-center justify-center p-4 text-slate-800"
     >
       <div className="mb-8 flex flex-col items-center">
-        <div className="bg-pink-500/20 p-4 rounded-full mb-4">
-          <Lock className="w-8 h-8 text-pink-500" />
+        <div className="bg-sky-500/20 p-4 rounded-full mb-4">
+          <Lock className="w-8 h-8 text-sky-700" />
         </div>
         <h1 className="text-2xl font-light mb-2">Enter Passcode</h1>
         <p className="text-slate-500 text-sm">Enter the date it all started (DDMMYY)</p>
@@ -55,8 +55,8 @@ export default function PasscodeScreen({ onUnlock }) {
             transition={{ duration: 0.4 }}
             className={`w-4 h-4 rounded-full border-2 ${
               pin.length > i 
-                ? (error ? 'bg-red-500 border-red-500' : 'bg-pink-500 border-pink-500')
-                : (error ? 'border-red-500' : 'border-pink-200')
+                ? (error ? 'bg-red-500 border-red-500' : 'bg-sky-500 border-sky-500')
+                : (error ? 'border-red-500' : 'border-sky-200')
             }`}
           />
         ))}
@@ -67,7 +67,7 @@ export default function PasscodeScreen({ onUnlock }) {
           <button
             key={num}
             onClick={() => handleInput(num.toString())}
-            className="w-16 h-16 rounded-full border border-pink-200 flex items-center justify-center text-2xl font-light hover:bg-pink-50 transition-colors active:scale-95 mx-auto"
+            className="w-16 h-16 rounded-full border border-sky-200 flex items-center justify-center text-2xl font-light hover:bg-sky-50 transition-colors active:scale-95 mx-auto"
           >
             {num}
           </button>
@@ -75,13 +75,13 @@ export default function PasscodeScreen({ onUnlock }) {
         <div /> {/* Empty space for alignment */}
         <button
           onClick={() => handleInput('0')}
-          className="w-16 h-16 rounded-full border border-pink-200 flex items-center justify-center text-2xl font-light hover:bg-pink-50 transition-colors active:scale-95 mx-auto"
+          className="w-16 h-16 rounded-full border border-sky-200 flex items-center justify-center text-2xl font-light hover:bg-sky-50 transition-colors active:scale-95 mx-auto"
         >
           0
         </button>
         <button
           onClick={handleDelete}
-          className="w-16 h-16 rounded-full flex items-center justify-center text-sm font-medium text-slate-500 hover:text-pink-500 transition-colors active:scale-95 mx-auto"
+          className="w-16 h-16 rounded-full flex items-center justify-center text-sm font-medium text-slate-500 hover:text-sky-700 transition-colors active:scale-95 mx-auto"
         >
           DEL
         </button>
