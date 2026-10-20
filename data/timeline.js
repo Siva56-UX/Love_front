@@ -38,11 +38,18 @@ export const timeline = [
     "image": "/images/74256_0.jpg"
   },
   {
+    "id": "memory-11",
+    "date": "November 3, 2024",
+    "title": "และก็มาแวะกินหมูกระทะ",
+    "description": "ชีวืตเรามีแต่กิน แล้วก็กิน",
+    "image": "/images/74260_0.jpg"
+  },
+  {
     "id": "memory-12",
     "date": "November 3, 2024",
     "title": "รูปคู่แรกๆเลยได้มั้งเนี่ย",
     "description": "",
-    "image": "/images/74262_0.jpg"
+    "image": "/images/74261_0.jpg"
   },
   {
     "id": "memory-13",
