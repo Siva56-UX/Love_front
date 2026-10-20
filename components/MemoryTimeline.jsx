@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { timeline, timelineHeading } from '../data/timeline';
 
-export default function MemoryTimeline() {
+export default function MemoryTimeline({ onFirstMemoryVisible }) {
   return (
     <section className="relative py-16 md:py-24" aria-labelledby="memories-title">
       <div className="mx-auto max-w-6xl px-5 md:px-10">
@@ -23,6 +23,7 @@ export default function MemoryTimeline() {
               return (
                 <motion.article
                   key={memory.id}
+                  onViewportEnter={index === 0 ? onFirstMemoryVisible : undefined}
                   initial={{ opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}

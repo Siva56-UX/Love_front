@@ -5,7 +5,7 @@ import { Lock } from 'lucide-react';
 
 const CORRECT_PIN = '201024'; // October 20, 2024
 
-export default function PasscodeScreen({ onUnlock }) {
+export default function PasscodeScreen({ onUnlock, onCorrectPin }) {
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
 
@@ -17,6 +17,7 @@ export default function PasscodeScreen({ onUnlock }) {
       
       if (newPin.length === 6) {
         if (newPin === CORRECT_PIN) {
+          onCorrectPin?.();
           setTimeout(onUnlock, 500); // Small delay for smooth UX
         } else {
           setError(true);

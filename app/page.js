@@ -1,21 +1,27 @@
 'use client';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PasscodeScreen from '@/components/PasscodeScreen';
 import LoveCounter from '@/components/LoveCounter';
 import MemoryTimeline from '@/components/MemoryTimeline';
 import InteractiveRoom from '@/components/InteractiveRoom';
 import QuizSection from '@/components/QuizSection';
+import MemoryHeart from '@/components/MemoryHeart';
+import BackgroundMusic from '@/components/BackgroundMusic';
 
 export default function Home() {
+  const musicRef = useRef(null);
+  const [reachedTimeline, setReachedTimeline] = useState(false);
+  const onFirstMemoryVisible = useCallback(() => setReachedTimeline(true), []);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isQuizPassed, setIsQuizPassed] = useState(false);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-50 text-slate-800">
+      <BackgroundMusic ref={musicRef} unlocked={isUnlocked} reachedTimeline={reachedTimeline} />
       <AnimatePresence mode="wait">
         {!isUnlocked ? (
-          <PasscodeScreen key="passcode" onUnlock={() => setIsUnlocked(true)} />
+          <PasscodeScreen onCorrectPin={() => musicRef.current?.prime()} key="passcode" onUnlock={() => setIsUnlocked(true)} />
         ) : (
           <motion.div
             key="main-app"
@@ -24,7 +30,8 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <LoveCounter />
-            <MemoryTimeline />
+            <MemoryTimeline onFirstMemoryVisible={onFirstMemoryVisible} />
+            <MemoryHeart />
             
             {!isQuizPassed ? (
               <QuizSection onSuccess={() => setIsQuizPassed(true)} />
