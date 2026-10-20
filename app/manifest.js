@@ -5,8 +5,8 @@ export default function manifest() {
     description: 'เรื่องราวและภาพความทรงจำของเรา',
     start_url: '/',
     display: 'standalone',
-    background_color: '#f0f9ff',
-    theme_color: '#e0f2fe',
+    background_color: '#fdf2f8',
+    theme_color: '#fce7f3',
     icons: [
       {
         src: '/favicon.ico',

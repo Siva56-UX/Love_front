@@ -12,7 +12,7 @@ export default function Home() {
   const [isQuizPassed, setIsQuizPassed] = useState(false);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-sky-100 via-sky-50 to-pink-50 text-slate-800">
+    <main className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-50 text-slate-800">
       <AnimatePresence mode="wait">
         {!isUnlocked ? (
           <PasscodeScreen key="passcode" onUnlock={() => setIsUnlocked(true)} />

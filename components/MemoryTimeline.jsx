@@ -41,10 +41,9 @@ export default function MemoryTimeline() {
                   <span className="z-10 col-start-1 row-start-1 mx-auto grid h-11 w-11 place-items-center rounded-full border border-sky-200 bg-white md:col-start-2 md:row-start-1" aria-hidden="true">
                     <span className="h-2.5 w-2.5 rounded-full bg-sky-500" />
                   </span>
-                  <div className={`col-start-2 w-full max-w-sm md:row-start-1 md:justify-self-center ${isEven ? 'md:col-start-3' : 'md:col-start-1'}`}>
-                    <figure className={`block w-full rounded-2xl border border-sky-100 bg-white p-2 shadow-md shadow-sky-100/70 md:p-3 ${isEven ? '-rotate-1' : 'rotate-1'}`}>
-                      <img src={memory.image} alt={memory.title || fallbackTitle} loading="lazy" className="aspect-[4/3] w-full rounded-xl object-cover" />
-                      <figcaption className="px-2 pb-1 pt-3 text-sm text-slate-600">{memory.title || fallbackTitle}</figcaption>
+                  <div className={`col-start-2 w-full max-w-xs md:row-start-1 md:justify-self-center ${isEven ? 'md:col-start-3' : 'md:col-start-1'}`}>
+                    <figure className={`mx-auto block w-fit max-w-full rounded-2xl border border-sky-100 bg-white p-2 shadow-md shadow-sky-100/70 md:p-3 ${isEven ? '-rotate-1' : 'rotate-1'}`}>
+                      <img src={memory.image} alt={memory.title || fallbackTitle} loading="lazy" className="mx-auto block h-auto max-h-[360px] w-auto max-w-full rounded-xl object-contain md:max-h-[400px]" />
                     </figure>
                   </div>
                 </motion.article>
