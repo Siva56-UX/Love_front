@@ -5,6 +5,7 @@ import { music } from '../data/music';
 
 const BackgroundMusic = forwardRef(function BackgroundMusic({ unlocked, reachedTimeline }, ref) {
   const audioRef = useRef(null);
+  const startTime = Math.max(0, music.startTime ?? 0);
   const [playing, setPlaying] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -24,15 +25,16 @@ const BackgroundMusic = forwardRef(function BackgroundMusic({ unlocked, reachedT
     if (!unlocked || !reachedTimeline) return;
     const audio = audioRef.current;
     if (!audio) return;
-    audio.currentTime = 0;
+    audio.currentTime = startTime;
     audio.muted = false;
     audio.volume = music.volume;
     audio.play().catch(() => setMessage('แตะเพื่อเริ่มเพลง'));
-  }, [unlocked, reachedTimeline]);
+  }, [unlocked, reachedTimeline, startTime]);
 
   async function toggle() {
     const audio = audioRef.current;
     if (!audio.paused) { audio.pause(); return; }
+    if (audio.currentTime < startTime) audio.currentTime = startTime;
     audio.muted = false;
     audio.volume = music.volume;
     try { await audio.play(); setMessage(''); }
@@ -41,7 +43,17 @@ const BackgroundMusic = forwardRef(function BackgroundMusic({ unlocked, reachedT
 
   return (
     <>
-      <audio ref={audioRef} src={music.src} preload="none" loop
+      <audio ref={audioRef} src={music.src} preload="none"
+        onLoadedMetadata={() => {
+          const audio = audioRef.current;
+          if (audio.currentTime < startTime) audio.currentTime = startTime;
+        }}
+        onEnded={() => {
+          if (!unlocked || !reachedTimeline) return;
+          const audio = audioRef.current;
+          audio.currentTime = startTime;
+          audio.play().catch(() => setMessage('แตะเพื่อเริ่มเพลง'));
+        }}
         onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
         onError={() => { setPlaying(false); setMessage('ยังเล่นเพลงไม่ได้ ลองอีกครั้งนะ'); }} />
       {unlocked && reachedTimeline && (
