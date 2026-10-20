@@ -102,14 +102,14 @@ export const timeline = [
   },
   {
     "id": "memory-19",
-    "date": "June 04, 2025",
+    "date": "September 18, 2025",
     "title": "ออกรถด้วยกันคันแรก",
     "description": "มีคนอยากได้ HRV-RS",
     "image": "/images/91480.jpg"
   },
   {
     "id": "memory-20",
-    "date": "June 04, 2025",
+    "date": "October 10, 2025",
     "title": "รวมครอบครัวของโอมและสร้อย",
     "description": "น้าเมากันมาก",
     "image": "/images/91488.jpg"
