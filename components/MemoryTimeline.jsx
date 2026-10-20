@@ -11,7 +11,6 @@ export default function MemoryTimeline({ onFirstMemoryVisible }) {
           <p className="mb-3 text-sm uppercase tracking-[0.24em] text-sky-700">{timelineHeading.subtitle}</p>
           <h2 id="memories-title" className="text-3xl font-light text-slate-800 md:text-4xl">{timelineHeading.title}</h2>
           <div className="mx-auto mt-5 h-px w-16 bg-pink-300" />
-          <p className="mt-4 text-sm text-slate-500">{timeline.length} ภาพ · เลื่อนลงเพื่อดูตามลำดับ</p>
         </header>
 
         <div className="relative mx-auto max-w-5xl">
