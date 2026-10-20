@@ -83,7 +83,7 @@ export const timeline = [
     "id": "memory-16",
     "date": "June 10, 2025",
     "title": "ไปบ้านสร้อยครั้งแรก ",
-    "description": "แรกๆก็กลัวๆ หลังไปฉ่ๆ",
+    "description": "แรกๆก็กลัวๆ หลังไปฉ่ำๆ",
     "image": "/images/91743_0.jpg"
   },
   {
@@ -117,7 +117,7 @@ export const timeline = [
   {
     "id": "anniversary",
     "date": "Today",
-    "title": "จะครบ 2 ปี แล้วนะ",
+    "title": "ครบ 2 ปี แล้วนะ",
     "description": "ขอบคุณที่เข้ามาเติมสีสันให้ชีวิตนะ (รอบวชก่อนแล้วค่อยแต่งนะ)",
     "image": "/images/74266_0.jpg"
   }
