@@ -12,8 +12,6 @@ import BouquetIntro from '@/components/BouquetIntro';
 
 export default function Home() {
   const musicRef = useRef(null);
-  const [showBouquet, setShowBouquet] = useState(true);
-  const finishBouquet = useCallback(() => setShowBouquet(false), []);
   const [reachedTimeline, setReachedTimeline] = useState(false);
   const onFirstMemoryVisible = useCallback(() => setReachedTimeline(true), []);
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -23,9 +21,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-50 text-slate-800">
       <BackgroundMusic ref={musicRef} unlocked={isUnlocked} reachedTimeline={reachedTimeline} />
       <AnimatePresence mode="wait">
-        {showBouquet ? (
-          <BouquetIntro key="bouquet" onComplete={finishBouquet} />
-        ) : !isUnlocked ? (
+        {!isUnlocked ? (
           <PasscodeScreen onCorrectPin={() => musicRef.current?.prime()} key="passcode" onUnlock={() => setIsUnlocked(true)} />
         ) : (
           <motion.div
@@ -34,7 +30,10 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <LoveCounter />
+            <BouquetIntro />
+            <div id="our-story" className="scroll-mt-6">
+              <LoveCounter />
+            </div>
             <MemoryTimeline onFirstMemoryVisible={onFirstMemoryVisible} />
             <MemoryHeart />
             

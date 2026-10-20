@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId } from 'react';
+import { useId } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 // Deterministic flower positions keep server and client rendering identical.
@@ -16,13 +16,9 @@ const florets = Array.from({ length: 44 }, (_, i) => {
   return { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius, angle: i * 31 };
 });
 
-export default function BouquetIntro({ onComplete }) {
+export default function BouquetIntro() {
   const reducedMotion = useReducedMotion();
   const id = useId().replaceAll(':', '');
-  useEffect(() => {
-    const timer = setTimeout(onComplete, 4200);
-    return () => clearTimeout(timer);
-  }, [onComplete]);
 
   return (
     <motion.section
@@ -69,7 +65,7 @@ export default function BouquetIntro({ onComplete }) {
       </motion.div>
       <h1 id="bouquet-title" className="text-2xl font-light text-sky-800 md:text-3xl">ไฮเดรนเยียช่อนี้ ให้สร้อยนะ ♡</h1>
       <p className="mt-3 text-sm text-slate-500">ก่อนจะเปิดความทรงจำของเรา</p>
-      <button type="button" onClick={onComplete} className="mt-7 rounded-full border border-sky-200 bg-white/80 px-7 py-3 text-sm text-sky-700 transition-colors hover:bg-sky-50">เปิดความทรงจำ →</button>
+      <a href="#our-story" className="mt-7 rounded-full border border-sky-200 bg-white/80 px-7 py-3 text-sm text-sky-700 transition-colors hover:bg-sky-50">เลื่อนลงเพื่อดูความทรงจำของเรา ↓</a>
     </motion.section>
   );
 }
